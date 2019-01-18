@@ -5,7 +5,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, View, ListView, Dimensions } from 'react-native';
+import { StyleSheet, View, FlatList, Dimensions } from 'react-native';
 
 const { height, width } = Dimensions.get('window');
 
@@ -140,17 +140,15 @@ export default class Grid extends Component {
     /* eslint-enable no-unused-vars */
     return (
       <View style={styles.container}>
-        <ListView
+        <FlatList
           {...props}
           style={styles.list}
-          dataSource={this.state.dataSource}
-          renderRow={this._renderRow}
-          enableEmptySections
+          data={this.state.dataSource}
+          renderItem={this._renderRow}
           onEndReached={this.props.onEndReached}
           onEndReachedThreshold={height}
-          refreshControl={this.props.refreshControl}
-          renderFooter={this.props.renderFooter}
-          renderSectionHeader={this.props.renderSectionHeader}
+          ListFooterComponent={this.props.renderFooter}
+          ListHeaderComponent={this.props.renderSectionHeader}
         />
       </View>
     );
